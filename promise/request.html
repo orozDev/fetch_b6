@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    const request = (url) => new Promise((res, rej) => {
+        console.log(`Requesting data from ${url}...`)
+        const seconds = Math.floor(Math.random() * 10000)
+        setTimeout(() => {
+
+            if (seconds % 2 === 0) rej(`Error at getting data from ${url}`)
+
+            console.log(`Data from ${url} was received`)
+            res(JSON.stringify({
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: {
+                    id: 1,
+                    user: 'oroz',
+                    email: 'oroz@gmail.com',
+                }
+            }))
+        }, seconds)
+    })
+
+    request('https://youtube.com').then((response) => {
+        console.log('Preparing data...')
+        return new Promise((res, rej) => {
+            const data = JSON.parse(response)
+            setTimeout(() => res(data), 1500)
+        })
+    }).then((data) => {
+        console.log(data)
+    }).catch((error) => console.error(error))
+
+</script>
+</body>
+</html>

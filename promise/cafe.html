@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    const order = (foodName) => new Promise((res, rej) => {
+        const seconds = Math.floor(Math.random() * 10000)
+        console.log(`Your food ${foodName} will be ready in ${seconds / 1000}s`)
+        setTimeout(() => {
+            res(foodName)
+        }, seconds)
+    })
+
+
+    order(prompt('Enter food name')).then((foodName) => {
+        console.log(`Your food ${foodName} is ready!`)
+    })
+
+    console.log(1)
+
+</script>
+</body>
+</html>
